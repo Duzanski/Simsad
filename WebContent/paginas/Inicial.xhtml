@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:view contentType="text/html">
+	<h:head>
+		<f:facet name="first">
+			<meta http-equiv="X-UA-Compatible" content="EmulateIE8" />
+			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+			<title>SIMSAD | Sistema de Monitoramento de Saúde a Domicílio</title>
+		</f:facet>
+
+		<style type="text/css">
+.ui-layout-north {
+	z-index: 10 !important;
+	overflow: visible !important;;
+}
+
+.ui-layout-north .ui-layout-unit-content {
+	overflow: visible !important;
+}
+</style>
+	</h:head>
+
+
+	<h:body>
+
+		<p:layout fullPage="true">
+
+			<p:layoutUnit id="left" position="west" size="350" resizable="true"
+				closable="true" collapsible="true" header="Informações"
+				minSize="200">
+
+				<h:form>
+					<ui:include src="../templates/TemplateEsq.xhtml" />
+				</h:form>
+
+			</p:layoutUnit>
+
+			<p:layoutUnit id="right" position="east" size="380" header="Gallery"
+				resizable="true" closable="true" collapsible="true"
+				style="text-align:center">
+
+				<h:form>
+					<ui:include src="../templates/TemplateDir.xhtml" />
+				</h:form>
+
+
+			</p:layoutUnit>
+
+			<p:layoutUnit id="center" position="center"
+				header="Usuário: #{MBUsuario.usuarioBean.nome}">
+
+				<ui:include src="../templates/TemplateMenu.xhtml" />
+
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+
+				<center>
+					<h:graphicImage url="/imagens/principal.jpg" />
+				</center>
+
+			</p:layoutUnit>
+
+		</p:layout>
+
+		<p:dialog header="Basic Dialog" widgetVar="dlg1" modal="true">
+			<h:outputText value="Resistance to PrimeFaces is futile!" />
+		</p:dialog>
+
+	</h:body>
+
+</f:view>
+</html>

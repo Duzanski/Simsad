@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:view contentType="text/html">
+	<h:head>
+		<title><ui:insert name="title">SIMSAD |Sistema de Monitoramento de Saúde a Domicílio</ui:insert>
+		</title>
+		<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+
+		<style type="text/css">
+.ui-widget {
+	font-size: 11px !important;
+}
+
+</style>
+	</h:head>
+
+	<h:body>
+
+		<p:growl id="grow" showDetail="true" life="3000" showSummary="false" />
+
+		<p:layout fullPage="true">
+
+			<p:layoutUnit id="center" position="center"
+				style="text-align:center;" scrollable="true"
+				header="Usuário: #{MBUsuario.usuarioBean.nome}">
+
+				<p:toolbarGroup>
+
+					<ui:include src="/templates/TemplateMenu.xhtml"></ui:include>
+
+				</p:toolbarGroup>
+
+				<br />
+
+				<p:panel id="pnAgenteSaude" header=" Cadastro de Agente de Saúde">
+					<h:form>
+						<p:focus />
+						<h:panelGrid id="pnGridAg" columns="4" cellpadding="4" cellspacing="4">
+
+							<h:outputLabel value="Nome : " />
+							<p:inputText value="#{MBAgenteSaude.agenteSaudeBean.nome}"
+								size="55" required="true"
+								requiredMessage="Campo Nome é obrigatório !" maxlength="50" />
+
+							<h:outputLabel value="Sexo : " />
+							<p:selectOneMenu value="#{MBAgenteSaude.agenteSaudeBean.sexo}"
+								required="true" requiredMessage="Campo Sexo é obrigatório !" effect="drop"  style="width:160px;">
+								<f:selectItem itemLabel="Selecione uma Opção" />
+								<f:selectItem itemLabel="M" itemValue="M" />
+								<f:selectItem itemLabel="F" itemValue="F" />
+							</p:selectOneMenu>
+
+							<h:outputLabel value="RG : " />
+							<p:inputMask value="#{MBAgenteSaude.agenteSaudeBean.rg}"
+								size="30" required="true" 
+								mask="9.999.999-*"
+								requiredMessage="Campo RG é obrigatório !" />
+
+
+							<h:outputLabel value="CPF : " />
+							<p:inputMask value="#{MBAgenteSaude.agenteSaudeBean.cpf}"
+								size="30" required="true"
+								requiredMessage="Campo CPF é obrigatório !"
+								mask="999.999.999-99">
+								<f:converter converterId="converter.CpfConverter" />
+							</p:inputMask>
+
+							<h:outputLabel value="Nº Registro : " />
+							<p:inputMask
+								value="#{MBAgenteSaude.agenteSaudeBean.numeroRegistro}"
+								size="30" required="true"  mask="99999"
+								requiredMessage="Campo N° Registro é obrigatório !" />
+
+							<h:outputLabel value="Unidade de Saúde : " />
+							<p:selectOneMenu
+								value="#{MBAgenteSaude.agenteSaudeBean.beanUnidadeSaude.idUnidadeSaude}"
+								required="true" effect="drop"  style="width:160px;"
+								requiredMessage="Campo Unidade de Saúde é obrigatório !">
+								<f:selectItem itemLabel="Selecione uma Opção" />
+								<f:selectItems value="#{MBCombo.unidadeSaudeItem}" />
+							</p:selectOneMenu>
+
+							<h:outputLabel value="Telefone : " />
+							<p:inputMask value="#{MBAgenteSaude.agenteSaudeBean.telefone}"
+								size="30" mask="(99)9999-9999">
+							</p:inputMask>
+
+							<h:outputLabel value="Celular : " />
+							<p:inputMask value="#{MBAgenteSaude.agenteSaudeBean.celular}"
+								size="30" mask="(99)9999-9999">
+							</p:inputMask>
+
+							<br />
+
+							<p:commandButton value="Salvar" action="#{MBAgenteSaude.salvar}"
+								style="width:100px;"
+								update="pnGridAg,grow,pnConsultaAgenteGeral" />
+
+						</h:panelGrid>
+					</h:form>
+				</p:panel>
+
+				<br />
+				<p:panel id="pnConsultaAgenteGeral"
+					header="Consulda de Agentes de Saúde">
+					<h:form prependId="frmConsulta">
+
+						<br />
+						<h:panelGrid columns="3" cellspacing="6">
+							<h:outputLabel value="Nome :" />
+							<p:inputText value="#{MBAgenteSaude.agenteSaudeBean.nome}"
+								maxlength="15" />
+							<p:commandButton value="Pesquisar"
+								action="#{MBAgenteSaude.pesquisarPorNome}"
+								update="panelConsultaAgente" />
+						</h:panelGrid>
+
+
+						<br />
+
+						<p:outputPanel id="panelConsultaAgente">
+							<p:dataTable id="listaAgenteSaude"
+								rendered="#{MBAgenteSaude.visPanelConsulta == 1}"
+								emptyMessage="Agente de Saúde nao encontrado !" paginator="true"
+								rows="4" value="#{MBAgenteSaude.listAgenteSaudeData}"
+								var="agenteSaude">
+								<f:facet name="header">Listagem de Agentes de Saúde</f:facet>
+
+								<p:column>
+									<f:facet name="header">
+								Código
+							</f:facet>
+								#{agenteSaude.idPessoa}
+							</p:column>
+
+								<p:column>
+									<f:facet name="header">
+								Nome
+							</f:facet>
+								#{agenteSaude.nome}
+							</p:column>
+
+								<p:column>
+									<f:facet name="header">
+								CPF
+							</f:facet>
+									<h:outputText value="#{agenteSaude.cpf}"
+										converter="converter.CpfConverter" />
+								</p:column>
+
+								<p:column>
+									<f:facet name="header">
+								RG
+							</f:facet>
+									<h:outputText value="#{agenteSaude.rg}" />
+								</p:column>
+
+
+								<p:column>
+									<f:facet name="header">
+								Telefone
+							</f:facet>
+									<h:outputText value="#{agenteSaude.telefone}" />
+								</p:column>
+
+								<p:column>
+									<f:facet name="header">
+								Unidade de Saúde
+							</f:facet>
+								#{agenteSaude.beanUnidadeSaude.nome}
+							</p:column>
+
+								<p:column>
+									<f:facet name="header">
+								Alterar
+							</f:facet>
+									<p:commandButton actionListener="#{MBAgenteSaude.alterar}"
+										value="Alterar" update="pnAgenteSaude" />
+								</p:column>
+
+								<p:column>
+									<f:facet name="header">
+								Excluir
+							</f:facet>
+									<p:commandButton value="Excluir"
+										actionListener="#{MBAgenteSaude.excluir}"
+										update="grow,panelConsultaAgente" />
+								</p:column>
+
+							</p:dataTable>
+						</p:outputPanel>
+					</h:form>
+				</p:panel>
+			</p:layoutUnit>
+
+			<p:layoutUnit id="left" position="west" size="350" resizable="true"
+				closable="true" collapsible="true" header="Informações" minSize="200">
+
+				<h:form>
+					<ui:include src="../templates/TemplateEsq.xhtml" />
+				</h:form>
+
+			</p:layoutUnit>
+
+
+			<p:layoutUnit position="bottom" height="33"
+				header="Faculdades Integradas de Ourinhos - FIO">
+
+			</p:layoutUnit>
+
+
+
+		</p:layout>
+
+	</h:body>
+
+</f:view>
+
+</html>

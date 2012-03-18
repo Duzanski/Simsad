@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+
+<h:head>
+
+	<title>SIMSAD</title>
+
+
+	<style type="text/css">
+.ui-widget {
+	font-size: 12px !important;
+}
+
+.chRightTD {
+	text-align: center;
+}
+</style>
+
+</h:head>
+
+<h:body>
+
+	<p:growl id="grow" showDetail="true" life="3000" showSummary="false" />
+	<h:form>
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+
+		<p:separator style="width:500px;height:20px" />
+		<p:focus/>
+		<center>
+			<p:panel styleClass="chRightTD" style="width:250px">
+				<h1>SIMSAD</h1>
+				<h4>Informe o usuário e senha</h4>
+				
+				<h:panelGrid columns="2" >
+					
+						
+					<h:outputLabel value="Usuário: " onfocus="true"/>
+					<p:inputText value="#{MBUsuario.usuarioBean.nome}" required="true" maxlength="16" 
+					requiredMessage="Campo Usuário obrigatório !">
+					</p:inputText>
+									
+					<h:outputText value=" Senha: "/>
+					<p:password value="#{MBUsuario.usuarioBean.senha}" required="true" 
+	        		maxlength="14" requiredMessage="Campo Senha obrigatório!" feedback="false"/>
+	        		
+				</h:panelGrid>
+				<br />
+				<p:commandButton value="Logar" action="#{MBUsuario.validaUsuario}"
+					update="grow" style="width:70px;" />
+				<br />
+			</p:panel>
+			<h6>Desenvolvido Por - Reinaldo Duzanski Júnior | Felipe Thomaz
+				de Aquino | Douglas Costa</h6>
+		</center>
+
+	</h:form>
+</h:body>
+
+</html>

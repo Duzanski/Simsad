@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<!-- Configurações da conexão -->
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/simsad</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password"></property>
+
+		<!-- Dialeto utilizado -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+		<!-- Auto criação da base de dados, create(gera o bd), validate(para usar 
+			normal) -->
+		<property name="hbm2ddl.auto">validate</property>
+
+		<!-- Mostrar Codigo SQl -->
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+
+		<!-- Classes Anotadas -->
+		<mapping class="br.com.simsad.bean.AgenteSaude" />
+		<mapping class="br.com.simsad.bean.Pessoa" />
+		<mapping class="br.com.simsad.bean.UnidadeSaude" />
+		<mapping class="br.com.simsad.bean.Usuario" />
+		<mapping class="br.com.simsad.bean.Paciente" />
+		<mapping class="br.com.simsad.bean.Laboratorio" />
+		<mapping class="br.com.simsad.bean.Medicamento" />
+
+	</session-factory>
+</hibernate-configuration>

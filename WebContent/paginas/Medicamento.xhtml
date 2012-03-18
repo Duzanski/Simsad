@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:view contentType="text/html">
+	<h:head>
+		<title><ui:insert name="title">SIMSAD |Sistema de Monitoramento de Saúde a Domicílio</ui:insert>
+		</title>
+		<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+
+		<style type="text/css">
+.ui-widget {
+	font-size: 11px !important;
+}
+</style>
+	</h:head>
+
+	<h:body>
+
+		<p:growl id="grow" showDetail="true" life="3000" showSummary="false" />
+
+		<p:layout fullPage="true">
+
+			<p:layoutUnit id="center" position="center"
+				style="text-align:center;" scrollable="true"
+				header="Usuário: #{MBUsuario.usuarioBean.nome}">
+
+				<p:toolbarGroup>
+
+					<ui:include src="/templates/TemplateMenu.xhtml"></ui:include>
+
+				</p:toolbarGroup>
+
+				<br />
+
+				<p:panel id="pnMedicamento" header="Cadastro de Medicamento">
+					<h:form>
+						<p:focus />
+						<h:panelGrid id="pnGridMe" columns="4" cellspacing="4"
+							cellpadding="4">
+
+							<h:outputLabel value="Nome : " />
+							<p:inputText value="#{MBMedicamento.medicamentoBean.nome}"
+								size="25" required="true"
+								requiredMessage="Campo Nome é obrigatório !" maxlength="28" />
+
+							<h:outputLabel value="Laboratorio: " />
+							<p:selectOneMenu
+								value="#{MBMedicamento.medicamentoBean.beanLaboratorio.idLaboratorio}"
+								effect="drop" style="width:160px;" required="true"
+								requiredMessage="Escolha um Laboratorio!">
+								<f:selectItem itemLabel="Selecione uma Opção" />
+								<f:selectItems value="#{MBCombo.laboratorioItem}" />
+							</p:selectOneMenu>
+
+							<br />
+
+							<p:commandButton value="Salvar" action="#{MBMedicamento.salvar}"
+								style="width:100px;" update="pnGridMe,grow,pnMedicamentoGeral" />
+
+						</h:panelGrid>
+					</h:form>
+				</p:panel>
+
+				<br />
+				<p:panel id="pnMedicamentoGeral" header="Consulda de Medicamento">
+					<h:form prependId="false">
+
+						<br />
+						<h:panelGrid columns="3" cellspacing="6">
+							<h:outputLabel value="Nome :" />
+							<p:inputText value="#{MBMedicamento.medicamentoBean.nome}"
+								maxlength="15" />
+							<p:commandButton value="Pesquisar"
+								action="#{MBMedicamento.pesquisarPorNome}"
+								update="panelConsultaMedicamento" />
+						</h:panelGrid>
+
+
+						<br />
+						<br />
+						<p:outputPanel id="panelConsultaMedicamento">
+							<p:dataTable id="listaMedicamento"
+								rendered="#{MBMedicamento.visPanelConsulta == 1}"
+								emptyMessage="Medicamento nao encontrado !" paginator="true"
+								rows="5" value="#{MBMedicamento.listMedicamentoData}"
+								var="medicamento">
+								<f:facet name="header">Listagem de Medicamento</f:facet>
+
+								<p:column>
+									<f:facet name="header">
+								Codigo
+							</f:facet>
+								#{medicamento.idMedicamento}
+							</p:column>
+
+								<p:column>
+									<f:facet name="header">
+								Nome
+							</f:facet>
+								#{medicamento.nome}
+							</p:column>
+
+								<p:column>
+									<f:facet name="header">
+								Laboratorio
+							</f:facet>
+								#{medicamento.beanLaboratorio.nome}
+							</p:column>
+
+								<p:column>
+									<f:facet name="header">
+								Alterar
+							</f:facet>
+									<p:commandButton actionListener="#{MBMedicamento.alterar}"
+										value="Alterar" update="pnMedicamento" />
+								</p:column>
+
+								<p:column>
+									<f:facet name="header">
+								Excluir
+							</f:facet>
+									<p:commandButton actionListener="#{MBMedicamento.excluir}"
+										value="Excluir" update="grow,panelConsultaMedicamento" />
+								</p:column>
+
+							</p:dataTable>
+						</p:outputPanel>
+
+
+					</h:form>
+				</p:panel>
+
+			</p:layoutUnit>
+
+			<p:layoutUnit id="left" position="west" size="350" resizable="true"
+				closable="true" collapsible="true" header="Informações"
+				minSize="200">
+
+				<h:form>
+					<ui:include src="../templates/TemplateEsq.xhtml" />
+				</h:form>
+
+			</p:layoutUnit>
+
+
+			<p:layoutUnit position="bottom" height="33"
+				header="Faculdades Integradas de Ourinhos - FIO">
+
+			</p:layoutUnit>
+
+
+
+		</p:layout>
+
+	</h:body>
+
+</f:view>
+
+</html>

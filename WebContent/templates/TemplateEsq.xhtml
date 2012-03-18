@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+<f:view contentType="text/html">
+<h:head>	
+		<title><ui:insert name="title">SIMSAD |Sistema de Monitoramento de Saúde a Domicílio</ui:insert>
+		</title>
+		<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+
+		<style type="text/css">
+.ui-widget {
+	font-size: 11px !important;
+}
+</style>
+	
+	</h:head>
+
+		
+					<p:accordionPanel event="mouseover" autoHeight="false">
+						<p:tab title="Glicemia">
+							<h:panelGrid columns="2" cellpadding="10">
+
+								<h:outputText
+									value="
+										- Entende-se por Glicemia a quantidade de açúcar (glicose) 
+										no sangue. As medições deste parametro são importantes na 
+										detecção e prevenção da hiperglicemia (niveis excessivos de 
+										açúcar no sangue) e da hipoglicemia (niveis de açúcar no
+										 sangue abaixo do normal)." />
+								<br />
+								<h:outputText
+									value="
+										 - Principais Sintomas : sede, urinar em excesso, cansaço. 
+										 Um estado de hipoglicemia dá sintomas como suores, fome, 
+										 tremores, ansiedade
+										" />
+								<br />
+								<h:outputText
+									value="
+										 - Valores Normais : Glicemia em jejum: inferior a 110 mg/ml
+											Glicemia pós prandial: inferior a 140 mg/dl" />
+
+							</h:panelGrid>
+						</p:tab>
+						
+<!-- 						<p:tab title="Tabela Glicemia"> -->
+<!-- 						<p:graphicImage value="/images/imgGlice2.jpg" /> -->
+<!-- 						</p:tab> -->
+						
+						<p:tab title="Hipertensão">
+							<h:panelGrid columns="2" cellpadding="10">
+								<h:outputText value="
+								- Pressão alta, ou hipertensão arterial é diagnosticada quando a pressão 
+								diastólica (mínima) é superior a 90mmHg (=9cm de mercúrio) 
+								e quando a pressão sistólica é superior a 150mmHh (=15cm de mercúrio)
+								
+								" />
+							</h:panelGrid>
+						</p:tab>
+						
+<!-- 						<p:tab title="Tabela Hipersensão"> -->
+<!-- 						<p:graphicImage value="/images/imgHiper2.jpg" /> -->
+<!-- 						</p:tab> -->
+
+					</p:accordionPanel>
+				
+
+	</f:view>
+</html>

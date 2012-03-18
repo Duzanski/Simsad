@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Paciente" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.callouts" value="##Sat Oct 22 14:30:31 BRST 2011"/>
+	<parameter name="ID_PESSOA" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT DISTINCT PE.NOME, PE.CPF, PE.RG, PE.TELEFONE,
+PA.DATA_NASC, PA.ESTADO_CIVIL, VIS.PESO, VIS.ALTURA, VIS.DT_VISITA, VIS.DT_PROXIMA_VISITA, GLI.GLICEMIA, HIP.SISTOLICA, HIP.DIASTOLICA
+
+FROM TB_PESSOA PE, TB_PACIENTE PA, TB_VISITA VIS, TB_GLICEMIA GLI, TB_HIPERTENSAO HIP
+
+WHERE PE.ID_PESSOA = PA.ID_PESSOA
+AND PA.ID_PESSOA = VIS.ID_PESSOA
+AND VIS.ID_VISITA = GLI.beanVisita_ID_VISITA
+AND VIS.ID_VISITA = HIP.beanVisita_ID_VISITA
+AND PE.ID_PESSOA = $P{ID_PESSOA}]]>
+	</queryString>
+	<field name="NOME" class="java.lang.String"/>
+	<field name="CPF" class="java.lang.String"/>
+	<field name="RG" class="java.lang.String"/>
+	<field name="TELEFONE" class="java.lang.String"/>
+	<field name="DATA_NASC" class="java.sql.Timestamp"/>
+	<field name="ESTADO_CIVIL" class="java.lang.String"/>
+	<field name="PESO" class="java.lang.String"/>
+	<field name="ALTURA" class="java.lang.String"/>
+	<field name="DT_VISITA" class="java.sql.Date"/>
+	<field name="DT_PROXIMA_VISITA" class="java.sql.Date"/>
+	<field name="GLICEMIA" class="java.lang.Double"/>
+	<field name="SISTOLICA" class="java.lang.String"/>
+	<field name="DIASTOLICA" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="123" splitType="Stretch">
+			<staticText>
+				<reportElement x="161" y="21" width="341" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SIMSAD - Sistema de Monitoramento de Saúde a Domicílio]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="526" y="11" width="17" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="120" width="555" height="3"/>
+			</line>
+			<staticText>
+				<reportElement x="216" y="63" width="218" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório Detalhado - Paciente]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="555" height="3"/>
+			</line>
+			<image>
+				<reportElement x="15" y="11" width="127" height="101"/>
+				<imageExpression><![CDATA["C:\\Users\\Reinaldo\\workspace\\SIMSAD\\imagens\\Relatório.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="90" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="319" y="55" width="73" height="20" backcolor="#CCCCFF"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="10">
+				<reportElement x="460" y="55" width="73" height="20" backcolor="#CCCCFF"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="10">
+				<reportElement x="318" y="18" width="70" height="20" backcolor="#CCCCFF"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="10">
+				<reportElement x="460" y="18" width="73" height="20" backcolor="#CCCCFF"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="10">
+				<reportElement x="53" y="55" width="107" height="20" backcolor="#CCCCFF"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="10">
+				<reportElement x="52" y="18" width="175" height="20" backcolor="#CCCCFF"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="15" y="18" width="41" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="55" width="32" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CPF :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="434" y="55" width="23" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RG :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="18" width="50" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefone :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="252" y="18" width="66" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nascimento :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="251" y="55" width="68" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado Civil :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="68" y="18" width="159" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NOME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="68" y="55" width="92" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[($F{CPF}.length() == 14 ? ($F{CPF}.substring(0, 2) + "." + $F{CPF}.substring(2, 5) + "." + $F{CPF}.substring(5, 8) + "/" + $F{CPF}.substring(8, 12) + "-" + $F{CPF}.substring(12, 14)) : ($F{CPF}.substring(0, 3) + "." + $F{CPF}.substring(3, 6) + "." + $F{CPF}.substring(6, 9) + "-" + $F{CPF}.substring(9, 11)))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="468" y="18" width="65" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{TELEFONE}.substring (0 , 4) + "-" + $F{TELEFONE}.substring (4,8)]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="326" y="18" width="62" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{DATA_NASC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="468" y="55" width="65" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[($F{RG}.substring(0, 1) + "." + $F{RG}.substring (1, 4) + "." + $F{RG}.substring (4 , 7)+ "-" + $F{RG}.substring(7,8))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="329" y="55" width="61" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ESTADO_CIVIL}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="86" width="551" height="1"/>
+			</line>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="82" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="12" y="6" width="521" height="68"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="15" y="14" width="65" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Visita]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="15" y="42" width="65" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{DT_VISITA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="112" y="14" width="81" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Proxima Visita]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="112" y="42" width="81" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{DT_PROXIMA_VISITA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="227" y="42" width="50" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PESO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="227" y="14" width="50" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Peso]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="308" y="42" width="69" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{GLICEMIA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="308" y="14" width="69" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Glicemia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="14" width="106" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pressão Arterial]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="407" y="42" width="40" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{SISTOLICA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="447" y="42" width="19" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="468" y="42" width="45" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{DIASTOLICA}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="12" y="37" width="521" height="1"/>
+			</line>
+		</band>
+	</detail>
+	<summary>
+		<band height="33" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement mode="Opaque" x="0" y="10" width="557" height="14" forecolor="#FFFFFF" backcolor="#CCCCFF"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="308" y="12" width="97" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SIMSAD - WEB]]></text>
+			</staticText>
+			<textField evaluationTime="Report" pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="395" y="10" width="156" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

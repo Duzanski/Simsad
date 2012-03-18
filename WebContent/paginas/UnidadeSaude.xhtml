@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:view contentType="text/html">
+	<h:head>
+		<title><ui:insert name="title">SIMSAD |Sistema de Monitoramento de Saúde a Domicílio</ui:insert>
+		</title>
+		<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+
+		<style type="text/css">
+.ui-widget {
+	font-size: 11px !important;
+}
+</style>
+	</h:head>
+
+	<h:body>
+
+		<p:growl id="grow" showDetail="true" life="3000" showSummary="false" />
+
+		<p:layout fullPage="true">
+
+			<p:layoutUnit id="center" position="center"
+				style="text-align:center;" scrollable="true"
+				header="Usuário: #{MBUsuario.usuarioBean.nome}">
+
+
+				<p:toolbarGroup>
+
+					<ui:include src="/templates/TemplateMenu.xhtml"></ui:include>
+
+				</p:toolbarGroup>
+
+
+				<br />
+
+				<p:panel id="pnUnidadeSaude" header=" Cadastro de Unidade de Saúde">
+					<h:form>
+						<p:focus />
+						<h:panelGrid id="pnGridUn" columns="4" cellspacing="4"
+							cellpadding="2">
+
+							<h:outputLabel value="Nome Unidade de Saúde:" />
+							<p:inputText value="#{MBUnidadeSaude.unidadeSaudeBean.nome}"
+								required="true" maxlength="20"
+								requiredMessage="Campo Unidade de Saúde obrigatório !" />
+
+							<br />
+
+							<p:commandButton value="Salvar" action="#{MBUnidadeSaude.salvar}"
+								style="width:100px;"
+								update="pnGridUn,grow,pnConsultaUnidadeSaudeGeral" />
+
+						</h:panelGrid>
+					</h:form>
+				</p:panel>
+
+				<br />
+				<p:panel id="pnConsultaUnidadeSaudeGeral"
+					header="Consulda de Unidade de Saúde">
+					<h:form prependId="false">
+
+						<br />
+						<h:panelGrid columns="3" cellspacing="6">
+							<h:outputLabel value="Nome Unidade de Saúde:" />
+							<p:inputText value="#{MBUnidadeSaude.unidadeSaudeBean.nome}"
+								maxlength="15" />
+							<p:commandButton value="Pesquisar"
+								action="#{MBUnidadeSaude.pesquisarPorNome}"
+								update="panelConsultaUnidadeSaude" />
+						</h:panelGrid>
+
+
+						<br />
+						<br />
+						<p:outputPanel id="panelConsultaUnidadeSaude">
+							<p:dataTable id="listaUnidadeSaude"
+								rendered="#{MBUnidadeSaude.visPanelConsulta == 1}"
+								emptyMessage="Unidade de Saúde nao encontrado !"
+								paginator="true" rows="5"
+								value="#{MBUnidadeSaude.listUnidadeSaudeData}"
+								var="unidadeSaude">
+								<f:facet name="header">Listagem de Unidade de Saúde</f:facet>
+
+								<p:column>
+									<f:facet name="header">
+								Código
+							</f:facet>
+								#{unidadeSaude.idUnidadeSaude}
+							</p:column>
+
+								<p:column>
+									<f:facet name="header">
+								Nome
+							</f:facet>
+								#{unidadeSaude.nome}
+							</p:column>
+
+								<p:column>
+									<f:facet name="header">
+								Alterar
+							</f:facet>
+									<p:commandButton actionListener="#{MBUnidadeSaude.alterar}"
+										value="Alterar" update="pnUnidadeSaude" />
+								</p:column>
+
+
+								<p:column>
+									<f:facet name="header">
+								Excluir
+							</f:facet>
+									<p:commandButton value="Excluir"
+										actionListener="#{MBUnidadeSaude.excluir}"
+										update="grow,panelConsultaUnidadeSaude" />
+
+								</p:column>
+							</p:dataTable>
+						</p:outputPanel>
+					</h:form>
+				</p:panel>
+
+			</p:layoutUnit>
+
+			<p:layoutUnit id="left" position="west" size="350" resizable="true"
+				closable="true" collapsible="true" header="Informações"
+				minSize="200">
+
+				<h:form>
+					<ui:include src="../templates/TemplateEsq.xhtml" />
+				</h:form>
+
+			</p:layoutUnit>
+
+
+			<p:layoutUnit position="bottom" height="33"
+				header="Faculdades Integradas de Ourinhos - FIO">
+
+			</p:layoutUnit>
+
+
+
+		</p:layout>
+
+	</h:body>
+
+</f:view>
+
+</html>

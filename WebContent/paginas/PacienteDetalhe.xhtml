@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:view contentType="text/html">
+	<h:head>
+		<title><ui:insert name="title">SIMSAD |Sistema de Monitoramento de Saúde a Domicílio</ui:insert>
+		</title>
+		<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+
+		<style type="text/css">
+.ui-widget {
+	font-size: 11px !important;
+}
+</style>
+	</h:head>
+
+	<h:body>
+
+		<p:growl id="grow" showDetail="true" life="3000" showSummary="false" />
+
+		<p:layout fullPage="true">
+
+			<p:layoutUnit id="center" position="center"
+				style="text-align:center;" scrollable="true"
+				header="Usuário: #{MBUsuario.usuarioBean.nome}">
+
+				<p:toolbarGroup>
+
+					<ui:include src="/templates/TemplateMenu.xhtml"></ui:include>
+
+				</p:toolbarGroup>
+
+				<br />
+
+				<p:panel id="pnGrafico" header=" Relatório de Paciente - Detalhado">
+					<h:form>
+
+						<h:panelGrid columns="3">
+							<h:outputLabel value="Pacientes : " />
+							<p:selectOneMenu value="#{MBRelatorio.beanPaciente.idPessoa}"
+								effect="drop" style="width:160px;" required="true"
+								requiredMessage="Campo Paciente é obrigatório !">
+								<f:selectItem itemLabel="Selecione uma Opção" />
+								<f:selectItems value="#{MBCombo.pacienteItem}" />
+							</p:selectOneMenu>
+
+							<p:commandButton value="Gerar Relatório"
+								action="#{MBRelatorio.gerarRelatorioPaciente}" ajax="false" />
+
+						</h:panelGrid>
+					</h:form>
+				</p:panel>
+
+
+			</p:layoutUnit>
+
+
+			<p:layoutUnit id="left" position="west" size="350" resizable="true"
+				closable="true" collapsible="true" header="Informações"
+				minSize="200">
+
+				<h:form>
+					<ui:include src="../templates/TemplateEsq.xhtml" />
+				</h:form>
+
+			</p:layoutUnit>
+
+
+
+			<p:layoutUnit position="bottom" height="33"
+				header="Faculdades Integradas de Ourinhos - FIO">
+
+			</p:layoutUnit>
+
+
+
+		</p:layout>
+
+	</h:body>
+
+</f:view>
+
+</html>

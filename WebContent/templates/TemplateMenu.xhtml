@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+<f:view contentType="text/html">
+	<h:head>
+		<title><ui:insert name="title">SIMSAD |Sistema de Monitoramento de Saúde a Domicílio</ui:insert>
+		</title>
+		<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+
+		<style type="text/css">
+.ui-widget {
+	font-size: 11px !important;
+}
+</style>
+
+	</h:head>
+	<p:toolbar>
+		<p:toolbarGroup>
+			<h:form>
+				<p:menuButton value="Menu">
+					<p:menuitem value="Tela Inicial" url="Inicial.xhtml" />
+					<p:menuitem value="Sair" action="#{MBUsuario.encerraSessao}"
+						ajax="false" />
+				</p:menuButton>
+
+				<p:menuButton value="Cadastro">
+					<p:menuitem value="Agente Saúde" url="AgenteSaude.xhtml" />
+					<p:menuitem value="Laboratorio" url="Laboratorio.xhtml" />
+					<p:menuitem value="Medicamento" url="Medicamento.xhtml" />
+					<p:menuitem value="Unidade de Saúde" url="UnidadeSaude.xhtml" />
+					<p:menuitem value="Usuário" url="Usuario.xhtml" />
+				</p:menuButton>
+
+				<p:menuButton value="Relatórios">
+					<p:menuitem value="Gráfico - Glicemia" url="GraficoGli.xhtml" />
+					<p:menuitem value="Gráfico - Hipertensão" url="GraficoHip.xhtml" />
+					<p:menuitem value="Pacientes - Detalhado"
+						url="PacienteDetalhe.xhtml" />
+					<p:menuitem value="Pacientes - Medicamento"
+						url="MedicamentoPaciente.xhtml" />
+				</p:menuButton>
+			</h:form>
+		</p:toolbarGroup>
+	</p:toolbar>
+
+
+</f:view>
+</html>
